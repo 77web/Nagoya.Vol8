@@ -14,6 +14,16 @@ class Map
     private $points;
 
     /**
+     * @var bool[]
+     */
+    private $hasNextCache;
+
+    /**
+     * @var array
+     */
+    private $nextPointsCache;
+
+    /**
      * @param Point[] $points
      */
     public function __construct(array $points)
@@ -35,7 +45,10 @@ class Map
      */
     public function hasNext(Point $point)
     {
-        return count($this->getNextPoints($point)) > 0;
+        if (!isset($this->hasNextCache[$point->x.':'.$point->y])) {
+            $this->hasNextCache[$point->x.':'.$point->y] = count($this->getNextPoints($point)) > 0;
+        }
+        return $this->hasNextCache[$point->x.':'.$point->y];
     }
 
     /**
@@ -44,6 +57,10 @@ class Map
      */
     public function getNextPoints(Point $point)
     {
+        if (isset($this->nextPointsCache[$point->x.':'.$point->y])) {
+            return $this->nextPointsCache[$point->x.':'.$point->y];
+        }
+
         $expectedNextPoints = [];
 
         // 上
@@ -66,6 +83,7 @@ class Map
             'x' => $point->x,
             'y' => $point->y + 1,
         ];
+
         $nextPoints = [];
         foreach ($expectedNextPoints as $nextPoint) {
             if ($this->pointExists($nextPoint['x'], $nextPoint['y'])) {
@@ -75,6 +93,8 @@ class Map
                 }
             }
         }
+
+        $this->nextPointsCache[$point->x.':'.$point->y] = $nextPoints;
 
         return $nextPoints;
     }
