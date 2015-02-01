@@ -85,4 +85,21 @@ class Map
     {
         return isset($this->points[$x][$y]);
     }
+
+    /**
+     * @return Point[]
+     */
+    public function getStartPoints()
+    {
+        $starts = [];
+        foreach ($this->points as $line) {
+            foreach ($line as $point) {
+                if ($this->hasNext($point, null)) {
+                    $starts[] = $point;
+                }
+            }
+        }
+
+        return $starts;
+    }
 }

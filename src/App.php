@@ -12,6 +12,8 @@ class App
 
     private $mapBuilder;
 
+    private $router;
+
     /**
      * @param string $input
      * @return int
@@ -26,8 +28,7 @@ class App
 
 
         // ルーターに調べさせる
-        //$router = new Router($map);
-        //$maxHop = $router->getMaxHop();
+        //$maxHop = $this->router->getMaxHop($map);
 
         //return $maxHop;
     }
