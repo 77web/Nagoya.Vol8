@@ -11,7 +11,7 @@ class Router
 {
     public function getMaxHop(Map $map)
     {
-        $max = 0;
+        $max = 1;
         foreach ($map->getStartPoints() as $start) {
             $max = max($max, $this->calculateMaxHop($start, $map));
         }
