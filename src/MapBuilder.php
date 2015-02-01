@@ -23,11 +23,13 @@ class MapBuilder
      */
     public function build(array $pointDefinitions)
     {
-        // TODO X,Yの方向が数学の一般的な方向と逆になる
+        // TODO X,Yの正負が数学の一般的な方向と逆になる
         $map = [];
-        foreach ($pointDefinitions as $x => $points) {
-            $map[$x] = [];
-            foreach ($points as $y => $number) {
+        foreach ($pointDefinitions as $y => $points) {
+            foreach ($points as $x => $number) {
+                if (!isset($map[$x])) {
+                    $map[$x] = [];
+                }
                 $map[$x][$y] = $this->pointFactory->create($x, $y, $number);
             }
         }

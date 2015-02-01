@@ -23,8 +23,9 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Nagoya\Vol8\Map', $map);
 
         $lines = $map->getPoints();
-        $this->assertCount(2, $lines);
-        $this->assertCount(3, $lines[0]);
-        $this->assertCount(1, $lines[1]);
+        $this->assertCount(3, $lines);
+        $this->assertCount(2, $lines[0]); // 1列目
+        $this->assertCount(1, $lines[1]); // 2列目
+        $this->assertCount(1, $lines[2]); // 3列目
     }
 }
