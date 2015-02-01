@@ -23,7 +23,7 @@ class Route
 
     public function getHop()
     {
-        return count($this->points) - 1;
+        return count($this->points);
     }
 
     /**

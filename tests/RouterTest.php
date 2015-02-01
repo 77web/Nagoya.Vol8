@@ -36,8 +36,8 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         ]);
 
         return [
-            [1, $map1],
-            [2, $map2],
+            [2, $map1],
+            [3, $map2],
         ];
     }
 

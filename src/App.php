@@ -6,13 +6,31 @@
  */
 namespace Nagoya\Vol8;
 
+use Nagoya\Vol8\Util\InputParser;
+
 class App
 {
+    /**
+     * @var InputParser
+     */
     private $inputParser;
 
+    /**
+     * @var MapBuilder
+     */
     private $mapBuilder;
 
+    /**
+     * @var Router
+     */
     private $router;
+
+    public function __construct(InputParser $inputParser, MapBuilder $mapBuilder, Router $router)
+    {
+        $this->inputParser = $inputParser;
+        $this->mapBuilder = $mapBuilder;
+        $this->router = $router;
+    }
 
     /**
      * @param string $input
@@ -21,15 +39,15 @@ class App
     public function run($input)
     {
         // 点の定義を二次元配列に分割する
-        // $points = $this->inputParser->parse($input);
+        $points = $this->inputParser->parse($input);
 
         // 点の定義をPointのマップに変換する
-        // $map = $this->mapBuilder->build($points);
+        $map = $this->mapBuilder->build($points);
 
 
         // ルーターに調べさせる
-        //$maxHop = $this->router->getMaxHop($map);
+        $maxHop = $this->router->getMaxHop($map);
 
-        //return $maxHop;
+        return $maxHop;
     }
 }
