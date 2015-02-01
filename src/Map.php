@@ -31,20 +31,18 @@ class Map
 
     /**
      * @param Point $point
-     * @param Point|null $src
      * @return bool
      */
-    public function hasNext(Point $point, Point $src = null)
+    public function hasNext(Point $point)
     {
-        return count($this->getNextPoints($point, $src)) > 0;
+        return count($this->getNextPoints($point)) > 0;
     }
 
     /**
      * @param Point $point
-     * @param Point|null $src
      * @return Point[]
      */
-    public function getNextPoints(Point $point, Point $src = null)
+    public function getNextPoints(Point $point)
     {
         $expectedNextPoints = [];
 
@@ -72,7 +70,7 @@ class Map
         foreach ($expectedNextPoints as $nextPoint) {
             if ($this->pointExists($nextPoint['x'], $nextPoint['y'])) {
                 $next = $this->points[$nextPoint['x']][$nextPoint['y']];
-                if ((null === $src || !$src->equals($next)) && $next->number > $point->number) {
+                if ($next->number > $point->number) {
                     $nextPoints[] = $next;
                 }
             }

@@ -25,12 +25,4 @@ class Route
     {
         return count($this->points);
     }
-
-    /**
-     * @return Point|null
-     */
-    public function getLastPoint()
-    {
-        return count($this->points) > 0 ? $this->points[count($this->points) - 1] : null;
-    }
 }

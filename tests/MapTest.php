@@ -37,18 +37,17 @@ class MapTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param Point $point
-     * @param Point $src
      * @param int $expectedNextPoints
      * @dataProvider provideTestData
      */
-    public function test_hasNext_getNextPoints($point, $src, $expectedNextPoints)
+    public function test_hasNext_getNextPoints($point, $expectedNextPoints)
     {
         $hasNext = $expectedNextPoints > 0;
 
-        $this->assertEquals($hasNext, $this->map->hasNext($point, $src));
+        $this->assertEquals($hasNext, $this->map->hasNext($point));
 
         if ($hasNext) {
-            $nextPoints = $this->map->getNextPoints($point, $src);
+            $nextPoints = $this->map->getNextPoints($point);
 
             $this->assertEquals($expectedNextPoints, count($nextPoints));
         }
@@ -57,9 +56,9 @@ class MapTest extends \PHPUnit_Framework_TestCase
     public function provideTestData()
     {
         return [
-            [$this->createPoint(1, 0, 2), $this->createPoint(0, 0, 1), 1],
-            [$this->createPoint(0, 1, 4), $this->createPoint(0, 0, 1), 0],
-            [$this->createPoint(0, 0, 1), null, 2],
+            [$this->createPoint(1, 0, 2), 1],
+            [$this->createPoint(0, 1, 4), 0],
+            [$this->createPoint(0, 0, 1), 2],
         ];
     }
 

@@ -46,7 +46,6 @@ class Router
     private function generateRoutes(Point $start, Route $previousRoute, Map $map)
     {
         $cursor = $start;
-        $previous = $previousRoute->getLastPoint();
 
         $previousRoute->add($start);
 
@@ -54,7 +53,7 @@ class Router
             $previousRoute,
         ];
         if ($map->hasNext($cursor)) {
-            foreach ($map->getNextPoints($cursor, $previous) as $nextPoint) {
+            foreach ($map->getNextPoints($cursor) as $nextPoint) {
                 $routes = array_merge($routes, $this->generateRoutes($nextPoint, clone $previousRoute, $map));
             }
         }
